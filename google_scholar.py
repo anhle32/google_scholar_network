@@ -6,10 +6,10 @@ import streamlit as st
 import re
 import warnings
 warnings.filterwarnings("ignore")
-from scholar import scraping, models, helpers
+from scholar import scraping, models, helpers, scholarNetwork
 import networkx as nx
 import matplotlib.pyplot as plt
-from scholarNetwork import scholarNetwork as sn1
+
 
 
 
@@ -79,6 +79,6 @@ elif choice == 'Mạng liên kết nghiên cứu':
         G.add_weighted_edges_from(DG)
         fig = plt.figure(figsize=(10, 20),facecolor='white')
         edge_labels = nx.get_edge_attributes(G, 'weight')
-        fig1=sn1.draw_graph(edge_labels.keys(), graph_layout='spring', labels = edge_labels.values())
+        fig1=scholarNetwork.draw_graph(edge_labels.keys(), graph_layout='spring', labels = edge_labels.values())
         st.pyplot(plt.gcf())
 
