@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 from scholar import scraping, models, helpers, scholarNetwork
 import networkx as nx
 import matplotlib.pyplot as plt
-
+from selenium import webdriver
 
 
 
