@@ -7,3 +7,4 @@ scholarly
 networkx
 statsmodels
 selenium
+webdriver_manager
