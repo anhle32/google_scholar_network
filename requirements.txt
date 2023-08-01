@@ -6,3 +6,4 @@ seaborn
 scholarly
 networkx
 statsmodels
+selenium
