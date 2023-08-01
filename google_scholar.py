@@ -10,7 +10,11 @@ from scholar import scraping, models, helpers, scholarNetwork
 import networkx as nx
 import matplotlib.pyplot as plt
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+options = Options()
+options.headless = True
+driver = webdriver.Chrome(options=options)
 
 
 st.title("TIỆN ÍCH GOOGLE SCHOLAR_TRƯỜNG ĐẠI HỌC NGÂN HÀNG TP.HCM")
