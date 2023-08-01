@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options
 
 options = Options()
 options.headless = True
-driver = webdriver.Chrome(options=options)
+
 
 
 st.title("TIỆN ÍCH GOOGLE SCHOLAR_TRƯỜNG ĐẠI HỌC NGÂN HÀNG TP.HCM")
