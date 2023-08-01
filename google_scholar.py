@@ -42,7 +42,7 @@ if choice == 'Trích xuất hồ sơ':
     for i in search_query1:
       list1.append(i)
     
-    st.title("Danh sách tác giả đang sử dụng mail @hub.edu.vn để đăng ký google scholar")
+    st.title("Danh sách tác giả đang sử dụng mail @buh.edu.vn để đăng ký google scholar")
     data1=pd.DataFrame(list1)
     data1.shape
     st.dataframe(data1)
