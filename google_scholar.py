@@ -9,35 +9,13 @@ warnings.filterwarnings("ignore")
 from scholar import scraping, models, helpers, scholarNetwork
 import networkx as nx
 import matplotlib.pyplot as plt
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.firefox import GeckoDriverManager
-
-URL = ""
-TIMEOUT = 20
-
-st.title("Test Selenium")
-
-firefoxOptions = Options()
-firefoxOptions.add_argument("--headless")
-service = Service(GeckoDriverManager().install())
-driver = webdriver.Firefox(
-    options=firefoxOptions,
-    service=service,
-)
-driver.get('https://scholar.google.com/')
 
 
 
 st.title("TIỆN ÍCH GOOGLE SCHOLAR_TRƯỜNG ĐẠI HỌC NGÂN HÀNG TP.HCM")
 
 
-menu = ["Trích xuất hồ sơ", "Mạng liên kết nghiên cứu"]
+menu = ["Trích xuất hồ sơ","Chi tiết hồ sơ tác giả","Mạng liên kết nghiên cứu"]
 choice = st.sidebar.selectbox('Danh mục tính năng', menu)
 
 if choice == 'Trích xuất hồ sơ':    
@@ -85,12 +63,35 @@ if choice == 'Trích xuất hồ sơ':
         mime='text/csv',
     )
 
+elif choice == 'Chi tiết hồ sơ tác giả':
+    st.subheader("CHI TIẾT HỒ SƠ KHOA HỌC CỦA TÁC GIẢ TRƯỜNG ĐẠI HỌC NGÂN HÀNG TP.HCM")
+    v=st.text_input('Nhập tên tác giả')
+    if len(v)>0:
+        search_query = scholarly.search_author(v)
+        author=next(search_query)
+        st.write(author)
+
+    u=st.text_input('Nhập scholar_id')
+    if len(u)>0:
+        author = scholarly.search_author_id(u)
+        st.write('Thông tin các công trình nghiên cứu')
+        x=scholarly.fill(author, sections=['publications'])
+        st.write(x)
+
+        
+        st.write('Thông tin đồng tác giả')
+        y=scholarly.fill(author, sections=['coauthors'])
+        st.write(y)
+        
+
+
+
+
 elif choice == 'Mạng liên kết nghiên cứu':
     st.subheader("MẠNG LIÊN KẾT NGHIÊN CỨU KHOA HỌC")
     u=st.text_input('Nhập scholar_id')
     if len(u)>0:
         v=st.text_input('Nhập tên tác giả')
-        scraping.scrape_single_author(scholar_id=u, scholar_name=v, preferred_browser="chrome")
         g = helpers.build_graph()
         G1=g.edge_rank()
         dt=pd.DataFrame(G1)
